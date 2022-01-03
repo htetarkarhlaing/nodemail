@@ -240,7 +240,7 @@
         var mailTo = document.getElementById("mail-to");
         var subtitle = document.getElementById("subtitle");
         var content = document.getElementById("content");
-        fetch("http://localhost:8080/mail/send", {
+        fetch("https://nodemailforyou.herokuapp.com/mail/send", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
