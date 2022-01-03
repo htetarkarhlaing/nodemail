@@ -1,0 +1,19 @@
+{
+  "name": "nodemailservice",
+  "version": "1.0.0",
+  "description": "Mailing service with node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "Htet Arkar Hlaing",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.7.2"
+  }
+}

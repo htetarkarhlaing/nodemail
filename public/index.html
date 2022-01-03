@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NodeJs - Mailsender</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Quicksand", sans-serif;
+      }
+
+      .main {
+        width: 100vw;
+        height: 100vh;
+        /* background-color: rgb(6, 196, 186); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-image: linear-gradient(#737dfe, #ffcac9); */
+        background-image: url("background.jpg");
+      }
+
+      .glass-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 8px 0 rgba(35, 36, 49, 0.2);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        /* border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18); */
+      }
+
+      .form {
+        width: 60%;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 8px 0 rgba(35, 36, 49, 0.2);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .form-controller {
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .form-controller input {
+        padding: 12px 10px;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid rgb(85, 85, 85);
+        outline: none;
+        background-color: transparent;
+        color: #ccc;
+      }
+
+      .form-controller input::placeholder {
+        color: #ccc;
+      }
+      .form-controller input:-ms-input-placeholder {
+        color: #ccc;
+      }
+      .form-controller input::-ms-input-placeholder {
+        color: #ccc;
+      }
+
+      .form-controller input:focus {
+        border-color: #e04c7e;
+      }
+
+      .form-controller label {
+        margin-bottom: 10px;
+        color: #ccc;
+      }
+
+      .form-controller textarea {
+        padding: 12px 10px;
+        resize: none;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid rgb(85, 85, 85);
+        outline: none;
+        background-color: transparent;
+        color: #ccc;
+      }
+
+      .form-controller textarea::placeholder {
+        color: #ccc;
+      }
+      .form-controller textarea:-ms-input-placeholder {
+        color: #ccc;
+      }
+      .form-controller textarea::-ms-input-placeholder {
+        color: #ccc;
+      }
+
+      .form-controller textarea:focus {
+        border-color: #e04c7e;
+      }
+      .form-wrapper {
+        display: flex;
+        width: 100%;
+      }
+
+      .header {
+        font-size: 28px;
+        color: #ccc;
+        font-weight: bolder;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+      .description {
+        color: rgb(175, 175, 175);
+        margin-bottom: 20px;
+      }
+      .button-wrapper {
+        margin-top: 10px;
+        margin: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: end;
+      }
+      .button-wrapper button {
+        width: 200px;
+        padding: 4px;
+        height: 40px;
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        background-color: #96043e;
+        color: #ccc;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="glass-wrapper">
+        <div class="form">
+          <div class="form-controller">
+            <span class="header">Welcome From Node Mail Service</span>
+            <span class="description">
+              This is the nodemailing project written for fun.
+            </span>
+          </div>
+          <div class="form-wrapper">
+            <div class="form-controller">
+              <input
+                type="text"
+                id="gmail-name"
+                placeholder="Gmail Username"
+                required
+              />
+            </div>
+            <div class="form-controller">
+              <input
+                type="password"
+                id="gmail-password"
+                placeholder="Gmail Password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-wrapper">
+            <div class="form-controller">
+              <input
+                type="text"
+                id="mail-from"
+                placeholder="Mail From :"
+                required
+              />
+            </div>
+            <div class="form-controller">
+              <input
+                type="text"
+                id="mail-to"
+                placeholder="Mail To :"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-wrapper">
+            <div class="form-controller">
+              <input
+                type="text"
+                id="subtitle"
+                placeholder="Subtitle"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-wrapper">
+            <div class="form-controller">
+              <textarea
+                rows="8"
+                id="content"
+                placeholder="Content"
+                required
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-wrapper">
+            <div class="button-wrapper">
+              <button type="button" onclick="submitter()">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    function submitter(e) {
+        // e.preventDefault();
+        var gUser = document.getElementById("gmail-name");
+        var gPass = document.getElementById("gmail-password");
+        var mailFrom = document.getElementById("mail-from");
+        var mailTo = document.getElementById("mail-to");
+        var subtitle = document.getElementById("subtitle");
+        var content = document.getElementById("content");
+        fetch("http://localhost:8080/mail/send", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            authUser: gUser.value,
+            authPass: gPass.value,
+            mailFrom: mailFrom.value,
+            mailTo: mailTo.value,
+            subject: subtitle.value,
+            html: content.value,
+          }),
+        })
+          .then((res) => res.json())
+          .then((resJson) => {
+            if (resJson.meta.success === true) {
+              console.log("success");
+            } else {
+              console.log(resJson);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            window.alert("Error");
+          });
+      }
+    </script>
+  </body>
+</html>
